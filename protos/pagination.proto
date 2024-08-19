@@ -1,0 +1,10 @@
+syntax = "proto3";
+package product_grpc;
+
+option go_package = "product-grpc/protos/compiled";
+
+message Pagination {
+    uint64 totalCount = 1;
+    uint64 limit = 2;
+    uint64 page = 3;
+}

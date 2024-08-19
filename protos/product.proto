@@ -1,0 +1,49 @@
+syntax = "proto3";
+package product_grpc;
+
+import "pagination.proto";
+
+option go_package = "product-grpc/protos/compiled";
+
+service ProductService {
+    rpc GetProducts(Filter) returns (Products);
+    rpc GetProduct(Id) returns (Product);
+    rpc CreateProduct(Product) returns (Id);
+    rpc UpdateProduct(UpdateDataProduct) returns (Status);
+    rpc DeleteProduct(Id) returns (Status);
+}
+
+message Products {
+    Pagination pagination = 1;
+    repeated Product data = 2;
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    uint32 stock = 3;
+    double price = 4;
+}
+
+message UpdateDataProduct {
+    string id = 1;
+    optional string name = 2;
+    optional uint32 stock = 3;
+    optional double price = 4;
+}
+
+message Id {
+    string id = 1;
+}
+
+message Status {
+    string Status = 1;
+}
+
+message Filter {
+    optional int64 page = 1;
+    optional int64 limit = 2;
+    optional string name = 3;
+}
+
+message Empty{}
